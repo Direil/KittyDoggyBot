@@ -7,7 +7,6 @@ bot = telebot.TeleBot(token)
 
 
 # Generate a random index to choose a random pic
-
 cat_index = random.randint(0, 150)
 dog_index = random.randint(0, 435)
 cat_fact_limit = 250
