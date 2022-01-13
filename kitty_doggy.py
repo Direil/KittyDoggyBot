@@ -12,6 +12,7 @@ cat_facts = requests.get('https://catfact.ninja/facts?limit=250').json()
 fact_list = cat_facts['data']
 cat_list = [fact['fact'] for fact in fact_list]
 
+
 @bot.message_handler(commands=['start'])
 def start_message(message):
     keyboard = telebot.types.ReplyKeyboardMarkup(True)
@@ -19,15 +20,12 @@ def start_message(message):
     bot.send_message(message.chat.id, '🐈 / 🐕', reply_markup=keyboard)
 
 
-# @bot.message_handler(commands=['Menu'])
-# def menu(message):
-#     bot.send_message(message.chat.id, 'Hi! What do you want?', reply_markup=klava)
-
 @bot.message_handler(commands=['cat'])
 def get_cat_img(message):
     contents = requests.get('https://aws.random.cat/meow').json()
     url = contents['file']
     bot.send_photo(message.chat.id, url, caption=cat_list[cat_index])
+
 
 @bot.message_handler(commands=['dog'])
 def get_dog_img(message):
@@ -35,6 +33,7 @@ def get_dog_img(message):
     url = contents['url']
     dog_facts = requests.get("https://dog-facts-api.herokuapp.com/api/v1/resources/dogs?index=" + str(factIndex)).json()
     bot.send_photo(message.chat.id, url, caption=dog_facts[0]['fact'])
+
 
 @bot.message_handler(content_types=['text'])
 def send_kittydoggy(message):
